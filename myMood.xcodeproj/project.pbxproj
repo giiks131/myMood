@@ -8,18 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F23E29BB2906783E00B6B15D /* myMoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BA2906783E00B6B15D /* myMoodApp.swift */; };
-		F23E29BD2906783E00B6B15D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BC2906783E00B6B15D /* ContentView.swift */; };
+		F23E29BD2906783E00B6B15D /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BC2906783E00B6B15D /* MoodView.swift */; };
 		F23E29BF2906783F00B6B15D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E29BE2906783F00B6B15D /* Assets.xcassets */; };
 		F23E29C32906783F00B6B15D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E29C22906783F00B6B15D /* Preview Assets.xcassets */; };
+		F2BC14B029067FC400DA938C /* MoodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14AF29067FC400DA938C /* MoodViewModel.swift */; };
+		F2BC14B329067FEF00DA938C /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BC14B229067FEF00DA938C /* Mood.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F23E29B72906783E00B6B15D /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23E29BA2906783E00B6B15D /* myMoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myMoodApp.swift; sourceTree = "<group>"; };
-		F23E29BC2906783E00B6B15D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F23E29BC2906783E00B6B15D /* MoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodView.swift; sourceTree = "<group>"; };
 		F23E29BE2906783F00B6B15D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F23E29C02906783F00B6B15D /* myMood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myMood.entitlements; sourceTree = "<group>"; };
 		F23E29C22906783F00B6B15D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F2BC14AF29067FC400DA938C /* MoodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodViewModel.swift; sourceTree = "<group>"; };
+		F2BC14B229067FEF00DA938C /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +57,11 @@
 			isa = PBXGroup;
 			children = (
 				F23E29BA2906783E00B6B15D /* myMoodApp.swift */,
-				F23E29BC2906783E00B6B15D /* ContentView.swift */,
-				F23E29BE2906783F00B6B15D /* Assets.xcassets */,
+				F2BC14B129067FDD00DA938C /* ViewModel */,
+				F2BC14AE29067F5B00DA938C /* Views */,
+				F2BC14B429067FF900DA938C /* Model */,
 				F23E29C02906783F00B6B15D /* myMood.entitlements */,
+				F23E29BE2906783F00B6B15D /* Assets.xcassets */,
 				F23E29C12906783F00B6B15D /* Preview Content */,
 			);
 			path = myMood;
@@ -67,6 +73,30 @@
 				F23E29C22906783F00B6B15D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F2BC14AE29067F5B00DA938C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F23E29BC2906783E00B6B15D /* MoodView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F2BC14B129067FDD00DA938C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F2BC14AF29067FC400DA938C /* MoodViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F2BC14B429067FF900DA938C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2BC14B229067FEF00DA938C /* Mood.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +169,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23E29BD2906783E00B6B15D /* ContentView.swift in Sources */,
+				F2BC14B329067FEF00DA938C /* Mood.swift in Sources */,
+				F23E29BD2906783E00B6B15D /* MoodView.swift in Sources */,
+				F2BC14B029067FC400DA938C /* MoodViewModel.swift in Sources */,
 				F23E29BB2906783E00B6B15D /* myMoodApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

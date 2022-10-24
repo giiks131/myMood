@@ -1,9 +1,4 @@
-//
-//  myMoodApp.swift
-//  myMood
-//
-//  Created by Aleksandr Shapovalov on 24/10/22.
-//
+
 
 import SwiftUI
 
@@ -11,7 +6,7 @@ import SwiftUI
 struct myMoodApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MoodView()
         }
     }
 }
