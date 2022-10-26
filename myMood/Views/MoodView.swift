@@ -4,29 +4,38 @@ import SwiftUI
 struct MoodView: View {
     @State private var date = Date()
     @State private var showingSheet = false
-
+    
+    @State var items: [ItemModel] = [
+        ItemModel(title: "This is the first one", isCompleted: true),
+        ItemModel(title: "This is the second", isCompleted: false),
+        ItemModel(title: "Third one here", isCompleted: false)
+    ]
+    
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
-        UINavigationBar.appearance().backgroundColor = UIColor.white
+//        UINavigationBar.appearance().backgroundColor = UIColor.white
+//        UINavigationBar.appearance().backgroundColor = UIColor(Color("appColor"))
     }
     
     var body: some View {
         
         TabView {
             
-                NavigationStack {
+            NavigationStack {
                 
                 VStack(alignment: .center){
                     Spacer()
                     Text("Today Ring")
                         .font(.system(size: 25))
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
                     Image("emoji")
                         .resizable()
-                        
+                    
                         .frame(width: 150, height: 150)
-                   
+                    
                     Spacer()
                     Spacer()
                     Spacer()
@@ -35,127 +44,233 @@ struct MoodView: View {
                     Text("Week Ring")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
                     Image("ring")
                         .resizable()
                         .frame(width: 100, height: 100, alignment: .center)
                     
                     
-                    Form {
-                        Section {
+//                    Form {
+//                        Section {
+//
+//                            Text("hello 1")
+//
+//                            Text("hello 2")
+//                            Text("hello 3")
+//                            Text("hello 4")
+//                        }
+
+
+//                    }
+//                    .background(Color("appColor"))
+//                    .scrollContentBackground(.hidden)
+                    
+                    List {
+                        ForEach(items) { item in
                             
-                            Text("hello 1")
-                                
-                            Text("hello 2")
-                            Text("hello 3")
-                            Text("hello 4")
+                            ListRowView(item: item)
                         }
-                        
+                        .onDelete(perform: deleteItem)
                         
                     }
-                    .background(Color("appColor"))
                     .scrollContentBackground(.hidden)
+                    .scrollDisabled(true)
+                  
                     
                     
-                   
                 }
                 .background(Color("appColor"))
                 .navigationTitle("Mood")
+                
+                
                 .toolbar {
                     Button("Show emoji") {
-                        withAnimation { showingSheet.toggle() }
-//                        presentationMode.wrappedValue.dismiss()
+                        showingSheet.toggle()
+                    }
+                    .fullScreenCover(isPresented: $showingSheet) {
+                        ModalMoodView()
                     }
                     
                 }
-                .toolbarBackground(.visible, for: .navigationBar)
+//                .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
-            
+                .navigationBarHidden(true)
                 
-
+                
+                
             }
-                .tabItem {
-                    Image(systemName: "trophy.fill")
-                    Text("Activity")
-                }
+            .tabItem {
+                Image(systemName: "trophy.fill")
+                Text("Activity")
+            }
             
             
             
-//            NavigationStack {
-//                VStack() {
-//                    Text("hello world")
-//                }
-//            }
-//            .sheet(isPresented: $showingSheet) {
-//                self
-//            }
-        
+            //            NavigationStack {
+            //                VStack() {
+            //                    Text("hello world")
+            //                }
+            //            }
+            //            .sheet(isPresented: $showingSheet) {
+            //                self
+            //            }
+            
             
             
             NavigationStack {
                 VStack() {
                     DatePicker(
-                            "Start Date",
-                            selection: $date,
-                            displayedComponents: [.date]
-                        )
+                        "Start Date",
+                        selection: $date,
+                        displayedComponents: [.date]
+                    )
                     .datePickerStyle(.graphical)
                     .background(.white)
                     .padding(.all)
                     .cornerRadius(65)
-                   
-//                    Spacer()
+                    
+                    Spacer()
+                    
                     
                     Text("Your current mood: ")
-                        .font(.system(size: 30))
+                        .font(.system(size: 35))
                         .fontWeight(.bold)
-                   
-                    Image("emoji")
-                        .resizable()
-
-                        .frame(width: 150, height: 150)
-//                        .padding(.bottom)
+                        .foregroundColor(.white)
+                    
+                    Button {
+                        showingSheet.toggle()
+                    }
+                    label: {
+                        Image("Lol")
+                            .resizable()
+                    }
+                    .fullScreenCover(isPresented: $showingSheet) {
+                        ModalMoodView()
+                    }
+                    .frame(width: 150, height: 150)
+                
+                    //                        .padding(.bottom)
                     Spacer()
+                    Spacer()
+                    Spacer()
+                    
                     
                 }
                 .background(Color("appColor"))
                 .navigationTitle("Calendar")
                 .toolbarBackground(.visible, for: .navigationBar)
                 .navigationBarTitleDisplayMode(.inline)
-               
+                .navigationBarHidden(true)
+                
             }
             .background(Color("appColor"))
             .tabItem {
                 Image(systemName: "calendar")
                 Text("Calendar")
-                    
-                
             }
-           
+            
         }
-                    
-//            NavigationStack {
-//                VStack() {
-//                    Text("hello world")
-//                    Button("Press to dismiss") {
-////                              dismiss()
-//                          }
-//                          .font(.title)
-//                          .padding()
-//                          .background(.black)
-//                }
-//            }
-//                .sheet(isPresented: $showingSheet) {
-//                    self
-//                }
+        
+        //            NavigationStack {
+        //                VStack() {
+        //                    Text("hello world")
+        //                    Button("Press to dismiss") {
+        ////                              dismiss()
+        //                          }
+        //                          .font(.title)
+        //                          .padding()
+        //                          .background(.black)
+        //                }
+        //            }
+        //                .sheet(isPresented: $showingSheet) {
+        //                    self
+        //                }
         
         
-  
+        
     }
-        
+    
+    func deleteItem(indexSet: IndexSet) {
+        items.remove(atOffsets: indexSet)
+    }
+    
 }
+
+struct ModalMoodView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationStack {
+            VStack() {
+           
+                
+                Image("howarechoose")
+                    .resizable()
+                    
+            
+                
+//                Spacer()
+//                Spacer()
+                HStack() {
+                    Button() {
+                        dismiss()
+                    } label: {
+                        Image("triste")
+                            .resizable()
+                    }
+                    .padding()
+                    .frame(width: 165, height: 165)
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("sick")
+                            .resizable()
+                    }
+                    .padding()
+                    .frame(width: 165, height: 165)
+                }
+//                                            .padding(.top, 150)
+                
+                
+                
+                HStack() {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("Cool")
+                            .resizable()
+                            
+                    }
+                    .padding()
+                    .shadow(radius: 0.3)
+                    .frame(width: 165, height: 165)
+                    
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image("lovely")
+                            .resizable()
+                    }
+                    .padding()
+                    .frame(width: 165, height: 165)
+                }
+                .padding(.bottom, 30)
+            
+                Spacer()
+            }
+            .background(Color("appColor"))
+        }
+        
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MoodView()
+        ModalMoodView()
     }
 }
