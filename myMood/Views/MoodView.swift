@@ -22,125 +22,159 @@ struct MoodView: View {
         
         TabView {
             
-            NavigationStack {
-                
-                VStack(alignment: .center){
-                    Spacer()
-                    Text("Today Ring")
-                        .font(.system(size: 25))
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
+                NavigationStack {
                     
-                    Image("emoji")
-                        .resizable()
-                    
-                        .frame(width: 150, height: 150)
-                    
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
-                    Text("Week Ring")
-                        .font(.system(size: 20))
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Image("ring")
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                    
-                    
-//                    Form {
-//                        Section {
-//
-//                            Text("hello 1")
-//
-//                            Text("hello 2")
-//                            Text("hello 3")
-//                            Text("hello 4")
-//                        }
-
-
-//                    }
-//                    .background(Color("appColor"))
-//                    .scrollContentBackground(.hidden)
-                    
-                    List {
-                        ForEach(items) { item in
+                    ZStack {
+                        
+                        VStack(alignment: .center){
+                            Spacer()
+                            Text("Today Ring")
+                                .font(.system(size: 25))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
                             
-                            ListRowView(item: item)
+                            ZStack {
+                                Image("Lol")
+                                    .resizable()
+                                
+                                    .frame(width: 120, height: 120)
+                                Circle ()
+                                    .stroke(
+                                        Color.red.opacity(0.5),
+                                        lineWidth: 28
+                                    )
+                                    .frame(width: 160, height: 160)
+                                
+                                
+                                
+                                Circle()
+                                    .trim(from: 0, to: 0.25)
+                                    .stroke (
+                                        Color.red,
+                                        style: StrokeStyle (
+                                            lineWidth: 28,
+                                            lineCap: .round
+                                            )
+                                    )
+                                    .rotationEffect(.degrees(-90))
+                                    .frame(width: 160, height: 160)
+//                                Spacer()
+//                                Spacer()
+//                                Spacer()
+//                                Spacer()
+                            }
+                            .padding(.bottom, 30)
+                            
+                            
+                            Text("Week Ring")
+                                .font(.system(size: 20))
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                            
+                            VStack {
+                                Circle()
+                                    .stroke(
+                                        Color.green.opacity(0.5),
+                                        lineWidth: 20
+                                    )
+                                    .frame(width: 120, height: 120)
+                                    .padding()
+                            }
+//                            Image("ring")
+//                                .resizable()
+//                                .frame(width: 100, height: 100, alignment: .center)
+                            
+                            
+                            //                    Form {
+                            //                        Section {
+                            //
+                            //                            Text("hello 1")
+                            //
+                            //                            Text("hello 2")
+                            //                            Text("hello 3")
+                            //                            Text("hello 4")
+                            //                        }
+                            
+                            
+                            //                    }
+                            //                    .background(Color("appColor"))
+                            //                    .scrollContentBackground(.hidden)
+                            
+                            List {
+                                ForEach(items) { item in
+                                    
+                                    ListRowView(item: item)
+                                }
+                                .onDelete(perform: deleteItem)
+                                
+                            }
+                            .scrollContentBackground(.hidden)
+                            .scrollDisabled(true)
+                            
+                            
+                            
                         }
-                        .onDelete(perform: deleteItem)
+                        .background(Color("appColor"))
+                        .navigationTitle("Mood")
+                        
+                        
+                        .toolbar {
+                            Button("Show emoji") {
+                                showingSheet.toggle()
+                            }
+                            .fullScreenCover(isPresented: $showingSheet) {
+                                ModalMoodView()
+                            }
+                            
+                        }
+                        //                .toolbarBackground(.visible, for: .navigationBar)
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarHidden(true)
                         
                     }
-                    .scrollContentBackground(.hidden)
-                    .scrollDisabled(true)
-                  
-                    
                     
                 }
-                .background(Color("appColor"))
-                .navigationTitle("Mood")
-                
-                
-                .toolbar {
-                    Button("Show emoji") {
-                        showingSheet.toggle()
-                    }
-                    .fullScreenCover(isPresented: $showingSheet) {
-                        ModalMoodView()
-                    }
-                    
+                .tabItem {
+                    Image(systemName: "trophy.fill")
+                    Text("Activity")
                 }
-//                .toolbarBackground(.visible, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
                 
                 
                 
-            }
-            .tabItem {
-                Image(systemName: "trophy.fill")
-                Text("Activity")
-            }
-            
-            
-            
-            //            NavigationStack {
-            //                VStack() {
-            //                    Text("hello world")
-            //                }
-            //            }
-            //            .sheet(isPresented: $showingSheet) {
-            //                self
-            //            }
-            
-            
-            
-            NavigationStack {
-                VStack() {
-                    DatePicker(
-                        "Start Date",
-                        selection: $date,
-                        displayedComponents: [.date]
-                    )
-                    .datePickerStyle(.graphical)
-                    .background(.white)
-                    .padding(.all)
-                    .cornerRadius(65)
-                    
-                    Spacer()
-                    
-                    
-                    Text("Your current mood: ")
-                        .font(.system(size: 35))
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Button {
-                        showingSheet.toggle()
-                    }
+                //            NavigationStack {
+                //                VStack() {
+                //                    Text("hello world")
+                //                }
+                //            }
+                //            .sheet(isPresented: $showingSheet) {
+                //                self
+                //            }
+                
+                
+                
+                NavigationStack {
+                    VStack() {
+                        DatePicker(
+                            "Start Date",
+                            selection: $date,
+                            displayedComponents: [.date]
+                        )
+                        .datePickerStyle(.graphical)
+                        .background(.white)
+                        .padding(.all)
+                        .cornerRadius(65)
+                        
+                        Spacer()
+                        
+                        
+                        Text("Your current mood: ")
+                            .font(.system(size: 35))
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Button {
+                            showingSheet.toggle()
+                        }
                     label: {
                         Image("Lol")
                             .resizable()
@@ -149,26 +183,27 @@ struct MoodView: View {
                         ModalMoodView()
                     }
                     .frame(width: 150, height: 150)
-                
-                    //                        .padding(.bottom)
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    
+                        
+                        //                        .padding(.bottom)
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        
+                        
+                    }
+                    .background(Color("appColor"))
+                    .navigationTitle("Calendar")
+                    .toolbarBackground(.visible, for: .navigationBar)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarHidden(true)
                     
                 }
                 .background(Color("appColor"))
-                .navigationTitle("Calendar")
-                .toolbarBackground(.visible, for: .navigationBar)
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarHidden(true)
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Calendar")
+                }
                 
-            }
-            .background(Color("appColor"))
-            .tabItem {
-                Image(systemName: "calendar")
-                Text("Calendar")
-            }
             
         }
         
