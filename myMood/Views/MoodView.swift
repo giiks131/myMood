@@ -2,15 +2,24 @@
 import SwiftUI
 
 struct MoodView: View {
+    
     @State private var date = Date()
     @State private var showingSheet = false
-    @State var mischio = "lovely"
+    @State var chosenEmoji = "lovely"
+    @State var progressBar: Double = 0
+    @State var weekendBar: Double = 0
+    @State var dayProgress: Double = 0
+    @State var weekProgress: Double = 0
     
-    @State var items: [ItemModel] = [
-        ItemModel(title: "This is the first one", isCompleted: true),
-        ItemModel(title: "This is the second", isCompleted: false),
-        ItemModel(title: "Third one here", isCompleted: false)
-    ]
+    
+    @EnvironmentObject var listViewModel: ListViewModel
+   
+    
+//    @State var items: [ItemModel] = [
+//        ItemModel(title: "This is the first one", isCompleted: true),
+//        ItemModel(title: "This is the second", isCompleted: false),
+//        ItemModel(title: "Third one here", isCompleted: false)
+//    ]
     
     
     init() {
@@ -23,8 +32,10 @@ struct MoodView: View {
         
         TabView {
             
+            
                 NavigationStack {
                     
+                
                     ZStack {
                         
                         VStack(alignment: .center){
@@ -35,7 +46,7 @@ struct MoodView: View {
                                 .foregroundColor(.white)
                             
                             ZStack {
-                                Image(mischio)
+                                Image(chosenEmoji)
                                     .resizable()
                                 
                                     .frame(width: 120, height: 120)
@@ -49,7 +60,7 @@ struct MoodView: View {
                                 
                                 
                                 Circle()
-                                    .trim(from: 0, to: 0.25)
+                                    .trim(from: 0, to: self.progressBar)
                                     .stroke (
                                         Color.red,
                                         style: StrokeStyle (
@@ -59,6 +70,8 @@ struct MoodView: View {
                                     )
                                     .rotationEffect(.degrees(-90))
                                     .frame(width: 160, height: 160)
+                                    .animation(.easeInOut(duration: 2), value: true)
+                                    
 //                                Spacer()
 //                                Spacer()
 //                                Spacer()
@@ -71,15 +84,29 @@ struct MoodView: View {
                                 .font(.system(size: 20))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                            
-                            VStack {
+                            ZStack {
+                                VStack {
+                                    Circle()
+                                        .stroke(
+                                            Color.green.opacity(0.5),
+                                            lineWidth: 20
+                                        )
+                                        .frame(width: 120, height: 120)
+                                        .padding()
+                                }
+                                
                                 Circle()
-                                    .stroke(
-                                        Color.green.opacity(0.5),
-                                        lineWidth: 20
+                                    .trim(from: 0, to: self.weekendBar)
+                                    .stroke (
+                                        Color.green,
+                                        style: StrokeStyle (
+                                            lineWidth: 20,
+                                            lineCap: .round
+                                        )
                                     )
+                                    .rotationEffect(.degrees(-90))
                                     .frame(width: 120, height: 120)
-                                    .padding()
+                                    .animation(.easeInOut(duration: 2), value: true)
                             }
 //                            Image("ring")
 //                                .resizable()
@@ -102,13 +129,65 @@ struct MoodView: View {
                             //                    .scrollContentBackground(.hidden)
                             
                             List {
-                                ForEach(items) { item in
-                                    
+                                ForEach(listViewModel.items) { item in
                                     ListRowView(item: item)
+                                        .onTapGesture {
+                                            withAnimation(.linear) {
+                                                listViewModel.updateItem(item: item)
+                                                
+//                                                if (progressBar) < 0.99 {
+//                                                    self.progressBar += 0.3333
+//                                                } else {
+//                                                    progressBar -= 0.99
+//                                                }
+                                                
+                                                if item.isCompleted == false {
+                                                    self.progressBar += 1/3
+                                                    
+                                                    if dayProgress < 1 {
+                                                        dayProgress += 1/3
+                                                    }
+                                                    
+                                                } else {
+                                                    self.progressBar -= 1/3
+                                                    
+                                                    if dayProgress >= 1 {
+                                                        dayProgress -= 1/3
+                                                    }
+                                                }
+                                                
+                                                
+                                                if dayProgress >= 1 {
+                                                    self.weekendBar += 1/7
+                                                    
+                                                    if weekProgress < 7 {
+                                                        weekProgress += 1/7
+                                                    }
+                                                } else {
+                                                    if dayProgress < 1 && dayProgress > 2/3 {
+                                                        self.weekendBar -= 1/7
+                                                    }
+                                                }
+                                                
+                                                
+//                                                    {
+//                                                self.weekendBar -= 1/7
+//                                                    }
+//                                                if progressBar >= 0.99 {
+//                                                    self.weekendBar += 1/7
+//                                                }
+//                                                } else {
+//                                                    self.weekendBar -= 1/7
+//                                                }
+                                            }
+                                            
+                                        }
                                 }
-                                .onDelete(perform: deleteItem)
+//                                .onDelete(perform: listViewModel.deleteItem)
+                                .onMove(perform: listViewModel.moveItem)
                                 
                             }
+                            
                             .scrollContentBackground(.hidden)
                             .scrollDisabled(true)
                             
@@ -124,7 +203,7 @@ struct MoodView: View {
                                 showingSheet.toggle()
                             }
                             .fullScreenCover(isPresented: $showingSheet) {
-                                ModalMoodView(mischio: $mischio)
+                                ModalMoodView(mischio: $chosenEmoji)
                             }
                             
                         }
@@ -177,11 +256,11 @@ struct MoodView: View {
                             showingSheet.toggle()
                         }
                     label: {
-                        Image(mischio)
+                        Image(chosenEmoji)
                             .resizable()
                     }
                     .fullScreenCover(isPresented: $showingSheet) {
-                        ModalMoodView(mischio: $mischio)
+                        ModalMoodView(mischio: $chosenEmoji)
                     }
                     .frame(width: 150, height: 150)
                         
@@ -227,9 +306,12 @@ struct MoodView: View {
         
     }
     
-    func deleteItem(indexSet: IndexSet) {
-        items.remove(atOffsets: indexSet)
-    }
+//    func deleteItem(indexSet: IndexSet) {
+//        items.remove(atOffsets: indexSet)
+//    }
+//    func moveItem(from: IndexSet, to: Int) {
+//        items.move(fromOffsets: from, toOffset: to)
+//    }
     
 }
 
@@ -311,7 +393,12 @@ struct ModalMoodView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MoodView()
+        NavigationView {
+            MoodView()
+        }
 //        ModalMoodView()
+        .environmentObject(ListViewModel())
     }
+        
+    
 }
