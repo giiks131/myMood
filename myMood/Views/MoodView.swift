@@ -4,6 +4,7 @@ import SwiftUI
 struct MoodView: View {
     @State private var date = Date()
     @State private var showingSheet = false
+    @State var mischio = "lovely"
     
     @State var items: [ItemModel] = [
         ItemModel(title: "This is the first one", isCompleted: true),
@@ -34,7 +35,7 @@ struct MoodView: View {
                                 .foregroundColor(.white)
                             
                             ZStack {
-                                Image("Lol")
+                                Image(mischio)
                                     .resizable()
                                 
                                     .frame(width: 120, height: 120)
@@ -123,7 +124,7 @@ struct MoodView: View {
                                 showingSheet.toggle()
                             }
                             .fullScreenCover(isPresented: $showingSheet) {
-                                ModalMoodView()
+                                ModalMoodView(mischio: $mischio)
                             }
                             
                         }
@@ -176,11 +177,11 @@ struct MoodView: View {
                             showingSheet.toggle()
                         }
                     label: {
-                        Image("Lol")
+                        Image(mischio)
                             .resizable()
                     }
                     .fullScreenCover(isPresented: $showingSheet) {
-                        ModalMoodView()
+                        ModalMoodView(mischio: $mischio)
                     }
                     .frame(width: 150, height: 150)
                         
@@ -234,6 +235,7 @@ struct MoodView: View {
 
 struct ModalMoodView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var mischio : String
     
     var body: some View {
         NavigationStack {
@@ -250,6 +252,7 @@ struct ModalMoodView: View {
                 HStack() {
                     Button() {
                         dismiss()
+                        mischio = "triste"
                     } label: {
                         Image("triste")
                             .resizable()
@@ -259,6 +262,7 @@ struct ModalMoodView: View {
                     
                     Button {
                         dismiss()
+                        mischio = "sick"
                     } label: {
                         Image("sick")
                             .resizable()
@@ -273,6 +277,7 @@ struct ModalMoodView: View {
                 HStack() {
                     Button {
                         dismiss()
+                        mischio = "Cool"
                     } label: {
                         Image("Cool")
                             .resizable()
@@ -285,6 +290,7 @@ struct ModalMoodView: View {
                     
                     Button {
                         dismiss()
+                        mischio = "lovely"
                     } label: {
                         Image("lovely")
                             .resizable()
@@ -306,6 +312,6 @@ struct ModalMoodView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         MoodView()
-        ModalMoodView()
+//        ModalMoodView()
     }
 }
