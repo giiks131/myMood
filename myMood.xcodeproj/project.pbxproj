@@ -11,6 +11,8 @@
 		F23E29BD2906783E00B6B15D /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BC2906783E00B6B15D /* MoodView.swift */; };
 		F23E29BF2906783F00B6B15D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E29BE2906783F00B6B15D /* Assets.xcassets */; };
 		F23E29C32906783F00B6B15D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E29C22906783F00B6B15D /* Preview Assets.xcassets */; };
+		F26033CC291153D900ED3C3C /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26033CB291153D900ED3C3C /* NoteView.swift */; };
+		F26033CE2911544A00ED3C3C /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F26033CD2911544A00ED3C3C /* AddNoteView.swift */; };
 		F28912FD29087BDE00D23099 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28912FC29087BDE00D23099 /* Data.swift */; };
 		F293C94F2909383D004E83B3 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F293C94E2909383D004E83B3 /* ListRowView.swift */; };
 		F293C95229093D28004E83B3 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F293C95129093D28004E83B3 /* ItemModel.swift */; };
@@ -25,6 +27,8 @@
 		F23E29BE2906783F00B6B15D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F23E29C02906783F00B6B15D /* myMood.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = myMood.entitlements; sourceTree = "<group>"; };
 		F23E29C22906783F00B6B15D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F26033CB291153D900ED3C3C /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		F26033CD2911544A00ED3C3C /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		F28912FC29087BDE00D23099 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		F293C94E2909383D004E83B3 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		F293C95129093D28004E83B3 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 			children = (
 				F23E29BC2906783E00B6B15D /* MoodView.swift */,
 				F293C94E2909383D004E83B3 /* ListRowView.swift */,
+				F26033CB291153D900ED3C3C /* NoteView.swift */,
+				F26033CD2911544A00ED3C3C /* AddNoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -180,9 +186,11 @@
 			files = (
 				F2BC14B329067FEF00DA938C /* Mood.swift in Sources */,
 				F28912FD29087BDE00D23099 /* Data.swift in Sources */,
+				F26033CC291153D900ED3C3C /* NoteView.swift in Sources */,
 				F23E29BD2906783E00B6B15D /* MoodView.swift in Sources */,
 				F2BC14B029067FC400DA938C /* MoodViewModel.swift in Sources */,
 				F23E29BB2906783E00B6B15D /* myMoodApp.swift in Sources */,
+				F26033CE2911544A00ED3C3C /* AddNoteView.swift in Sources */,
 				F293C95229093D28004E83B3 /* ItemModel.swift in Sources */,
 				F293C94F2909383D004E83B3 /* ListRowView.swift in Sources */,
 			);
@@ -319,10 +327,11 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -359,10 +368,11 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";

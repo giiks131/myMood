@@ -5,7 +5,8 @@ struct MoodView: View {
     
     @State private var date = Date()
     @State private var showingSheet = false
-    @State var chosenEmoji = "lovely"
+    @State private var showingNoteSheet = false
+    @State var chosenEmoji = "cool"
     @State var progressBar: Double = 0
     @State var weekendBar: Double = 0
     @State var dayProgress: Double = 0
@@ -14,13 +15,7 @@ struct MoodView: View {
     
     @EnvironmentObject var listViewModel: ListViewModel
    
-    
-//    @State var items: [ItemModel] = [
-//        ItemModel(title: "This is the first one", isCompleted: true),
-//        ItemModel(title: "This is the second", isCompleted: false),
-//        ItemModel(title: "Third one here", isCompleted: false)
-//    ]
-    
+
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -44,7 +39,7 @@ struct MoodView: View {
                                 .font(.system(size: 25))
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
-                            
+                                .padding(.bottom, 30)
                             ZStack {
                                 Image(chosenEmoji)
                                     .resizable()
@@ -108,6 +103,7 @@ struct MoodView: View {
                                     .frame(width: 120, height: 120)
                                     .animation(.easeInOut(duration: 2), value: true)
                             }
+                            
 //                            Image("ring")
 //                                .resizable()
 //                                .frame(width: 100, height: 100, alignment: .center)
@@ -207,7 +203,7 @@ struct MoodView: View {
                             }
                             
                         }
-                        //                .toolbarBackground(.visible, for: .navigationBar)
+//                                        .toolbarBackground(.visible, for: .navigationBar)
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarHidden(true)
                         
@@ -271,17 +267,35 @@ struct MoodView: View {
                         
                         
                     }
+                    
                     .background(Color("appColor"))
-                    .navigationTitle("Calendar")
-                    .toolbarBackground(.visible, for: .navigationBar)
+//                    .navigationTitle("Tracker")
+//                    .toolbarBackground(.visible, for: .navigationBar)
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationBarHidden(true)
+                    .toolbar {
+                        Button() {
+                            showingNoteSheet.toggle()
+                        }
+                    label: {
+                        Image(systemName: "note.text")
+                            .resizable()
+                    }
+//                        .fullScreenCover(isPresented: $showingSheet) {
+//                            MainNoteView(mischio: $chosenEmoji)
+//                        }
+                    .sheet(isPresented: $showingNoteSheet) {
+                        MainNoteView()
+//                            .background(Color("appColor"))
+                    }
+                        
+                    }
+//                    .navigationBarHidden(true)
                     
                 }
                 .background(Color("appColor"))
                 .tabItem {
                     Image(systemName: "calendar")
-                    Text("Calendar")
+                    Text("Tracker")
                 }
                 
             
@@ -316,13 +330,25 @@ struct MoodView: View {
 }
 
 struct ModalMoodView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
-    @Binding var mischio : String
+    @Binding var mischio: String
     
     var body: some View {
         NavigationStack {
             VStack() {
-           
+                
+//                Button() {
+//                        presentationMode.wrappedValue.dismiss()
+//                    }
+//            label: {
+//                Image(systemName: "x.circle.fill")
+//                    .resizable()
+//                    .frame(width: 40, height: 40)
+//                    .padding(.trailing, 250)
+//            }
+            
+                
                 
                 Image("howarechoose")
                     .resizable()
@@ -334,9 +360,9 @@ struct ModalMoodView: View {
                 HStack() {
                     Button() {
                         dismiss()
-                        mischio = "triste"
+                        mischio = "cool"
                     } label: {
-                        Image("triste")
+                        Image("cool")
                             .resizable()
                     }
                     .padding()
@@ -344,9 +370,9 @@ struct ModalMoodView: View {
                     
                     Button {
                         dismiss()
-                        mischio = "sick"
+                        mischio = "triste"
                     } label: {
-                        Image("sick")
+                        Image("triste")
                             .resizable()
                     }
                     .padding()
@@ -359,9 +385,9 @@ struct ModalMoodView: View {
                 HStack() {
                     Button {
                         dismiss()
-                        mischio = "Cool"
+                        mischio = "lol"
                     } label: {
-                        Image("Cool")
+                        Image("lol")
                             .resizable()
                             
                     }
@@ -390,6 +416,37 @@ struct ModalMoodView: View {
     }
 }
 
+
+struct MainNoteView: View {
+    @Environment(\.dismiss) var dismiss
+    @StateObject var notes = Notes()
+    @State var sheetIsShowing = false
+    var body: some View {
+        NavigationView{
+            VStack{
+                NoteView()
+                    .sheet(isPresented: $sheetIsShowing){
+                        AddNew()
+                    }
+            }
+            .navigationTitle("Notes")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    Button {
+                        withAnimation{
+                            self.sheetIsShowing.toggle()
+                        }
+                    }label: {
+                        Label("Add Note", systemImage: "plus.circle")
+                    }
+                }
+            }
+            
+            
+        }
+        .environmentObject(notes)
+    }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

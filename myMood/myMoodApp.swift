@@ -11,6 +11,7 @@ struct myMoodApp: App {
         WindowGroup {
             NavigationView {
                 MoodView()
+                
             }
             .environmentObject(listViewModel)
         }
