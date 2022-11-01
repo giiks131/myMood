@@ -31,10 +31,10 @@ struct Note: Codable, Identifiable{
             }
             
         }
-        notes = [Note(title: "Test Note", content: "Tap add button. You can delete swiping left", timeStamp: date.getFormatteDate(format: "dd-MM-yyyy hh:mm"))]
+        notes = [Note(title: "Test Note", content: "Tap add button. You can delete swiping left", timeStamp: date.getFormatteDate(format: "dd-MM-yyyy HH:mm"))]
     }
     func addNote(title: String, content: String){
-     let tempNote = Note(title: title, content: content, timeStamp: date.getFormatteDate(format: "dd-MM-yyyy hh:mm"))
+     let tempNote = Note(title: title, content: content, timeStamp: date.getFormatteDate(format: "dd-MM-yyyy HH:mm"))
         notes.insert(tempNote, at: 0)
         saveData()
     }

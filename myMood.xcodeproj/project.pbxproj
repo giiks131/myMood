@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F21EA29E2911736C00238521 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F21EA29D2911736C00238521 /* Launch Screen.storyboard */; };
 		F23E29BB2906783E00B6B15D /* myMoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BA2906783E00B6B15D /* myMoodApp.swift */; };
 		F23E29BD2906783E00B6B15D /* MoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23E29BC2906783E00B6B15D /* MoodView.swift */; };
 		F23E29BF2906783F00B6B15D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E29BE2906783F00B6B15D /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F21EA29D2911736C00238521 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F23E29B72906783E00B6B15D /* myMood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myMood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F23E29BA2906783E00B6B15D /* myMoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myMoodApp.swift; sourceTree = "<group>"; };
 		F23E29BC2906783E00B6B15D /* MoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				F23E29C22906783F00B6B15D /* Preview Assets.xcassets */,
+				F21EA29D2911736C00238521 /* Launch Screen.storyboard */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21EA29E2911736C00238521 /* Launch Screen.storyboard in Resources */,
 				F23E29C32906783F00B6B15D /* Preview Assets.xcassets in Resources */,
 				F23E29BF2906783F00B6B15D /* Assets.xcassets in Resources */,
 			);
@@ -327,6 +331,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
@@ -368,6 +373,7 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
